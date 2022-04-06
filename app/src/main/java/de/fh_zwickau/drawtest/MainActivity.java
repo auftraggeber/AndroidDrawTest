@@ -22,10 +22,10 @@ public class MainActivity extends AppCompatActivity {
         return getResources().getDisplayMetrics().widthPixels;
     }
 
-    private int getHeight(int forWidth, Drawable forDrawable) {
-        float ratio = (float) forDrawable.getIntrinsicHeight() / forDrawable.getIntrinsicWidth();
+    private int getHeight(final int forWidth, final Drawable forDrawable) {
+        final float ratio = (float) forDrawable.getIntrinsicHeight() / forDrawable.getIntrinsicWidth();
 
-        System.out.println("Ratio: " + ratio);
+        System.out.println("Drawable ratio: " + ratio);
 
         return (int) (forWidth * ratio);
     }
@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView view = findViewById(R.id.imageView2);
-        Drawable drawable = getResources().getDrawable(R.drawable._2_png);
+        final ImageView view = findViewById(R.id.imageView2);
+        final Drawable drawable = getResources().getDrawable(R.drawable._2_png);
 
         final int width = getWidth();
         final int height = getHeight(width, drawable);
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Resource width: " + drawable.getIntrinsicWidth());
         System.out.println("Resource height: " + drawable.getIntrinsicHeight());
 
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-        Canvas canvas = new Canvas(bitmap);
+        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        final Canvas canvas = new Canvas(bitmap);
 
         setDrawable(canvas, R.drawable._2_png);
         drawDemoArrow(canvas);
@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
      * @param forCanvas Die Zeichenfläche, auf der gezeichnet wird.
      * @param drawable Die ID des Bildes.
      */
-    private void setDrawable(Canvas forCanvas, int drawable) {
-        Drawable d = getResources().getDrawable(drawable);
+    private void setDrawable(final Canvas forCanvas, final int drawable) {
+        final Drawable d = getResources().getDrawable(drawable);
 
-        int width = getWidth();
-        int height = getHeight(width, d);
+        final int width = getWidth();
+        final int height = getHeight(width, d);
 
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), drawable);
-        Bitmap sizedImageBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false); // Dieser Schritt ist wichtig, dass das Bild skaliert wird.
+        final Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), drawable);
+        final Bitmap sizedImageBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false); // Dieser Schritt ist wichtig, dass das Bild skaliert wird.
         forCanvas.drawBitmap(sizedImageBitmap, 0, 0, null);
     }
 
@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
      * Zeichnet den Demo-Pfeil
      * @param on Die Zeichenläche.
      */
-    private void drawDemoArrow(Canvas on) {
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private void drawDemoArrow(final Canvas on) {
+        final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
         paint.setStrokeWidth(STROKE_WIDTH);
 
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         on.drawLine(380, 315, 690, 315, paint);
         on.drawCircle(380,315,15, paint);
 
-        Path arrow = new Path();
+        final Path arrow = new Path();
         arrow.moveTo(700,315);
         arrow.lineTo(665, 300);
         arrow.lineTo(665, 330);
